@@ -4,7 +4,7 @@ use strict;
 use NEXT;
 use Data::FormValidator;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -19,12 +19,15 @@ Catalyst::Plugin::FormValidator - FormValidator for Catalyst
 
 =head1 DESCRIPTION
 
-L<Data::FormValidator> plugin.
+This plugin uses L<Data::FormValidator> to validate and set up form data
+from your request parameters. It's a quite thin wrapper around that
+module, so most of the relevant information can be found there.
 
 =head2 EXTENDED METHODS
 
 =head3 prepare
 
+Sets up $c->{form}
 =cut
 
 sub prepare {
@@ -42,9 +45,12 @@ Merge values with FormValidator.
 
     $c->form( required => ['yada'] );
 
-Returns a C<Data::FormValidator::Results> object.
+Returns a L<Data::FormValidator::Results> object.
 
     $c->form->valid('rest');
+
+The actual parameters sent to $c->form are the same as used by
+L<Data::FormValidator>'s check function.
 
 =cut
 
