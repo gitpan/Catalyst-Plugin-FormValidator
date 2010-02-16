@@ -1,5 +1,10 @@
 Revision history for Perl extension Catalyst::Plugin::FormValidator.
 
+0.05  Mon Feb  15 13:35:00 2010
+    - removed NEXT 
+    - turned into Moose::Role
+    - fleshed out tests more
+    - switched to Module::Install
 0.04  Thu Apr  2 18:45:00 2009
     - Add deprecation notice
 	- Added quotes on prereq.

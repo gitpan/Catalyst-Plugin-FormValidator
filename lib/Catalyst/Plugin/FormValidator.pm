@@ -1,14 +1,24 @@
 package Catalyst::Plugin::FormValidator;
 
-use strict;
-use NEXT;
+use Moose::Role;
 use Data::FormValidator;
+our $VERSION = '0.05';
+$VERSION = eval $VERSION;
 
-our $VERSION = '0.03';
+sub form {
+    my ($c, @opts) = @_;
+    if ( @opts ) {
+	    my $form = Data::FormValidator->check( $c->request->parameters, {@opts});
+        return $form;
+    }
+    else {
+        return Data::FormValidator->check( $c->request->parameters, {} );
+    }
+}
 
 =head1 NAME
 
-DEPRECATED - Catalyst::Plugin::FormValidator - Unmaintained Data::FormValidator
+Catalyst::Plugin::FormValidator - Data::FormValidator
 plugin for Catalyst.
 
 =head1 SYNOPSIS
@@ -18,19 +28,6 @@ plugin for Catalyst.
     $c->form( optional => ['rest'] );
     print $c->form->valid('rest');
 
-=head1 WARNING
-
-This code is not maintained, and is disrecommended for use in new applications.
-
-Instead, it is recommended to use newer, better supported modules such as:
-
-=over
-
-=item L<Catalyst::Controller::HTML::FormFu>
-
-=item L<Catalyst::Controller::FormBuilder>
-
-=back
 
 Note that not only is this plugin disrecommended (as it takes over the global
 C<< $c->form >> method, rather than being applyable in only part of your
@@ -43,19 +40,6 @@ from your request parameters. It's a quite thin wrapper around that
 module, so most of the relevant information can be found there.
 
 =head2 EXTENDED METHODS
-
-=head3 prepare
-
-Sets up $c->{form}
-
-=cut
-
-sub prepare {
-    my $c = shift;
-    $c = $c->NEXT::prepare(@_);
-    $c->{form} = Data::FormValidator->check( $c->request->parameters, {} );
-    return $c;
-}
 
 =head2 METHODS
 
@@ -74,16 +58,6 @@ L<Data::FormValidator>'s check function.
 
 =cut
 
-sub form {
-    my $c = shift;
-    if ( $_[0] ) {
-        my $form = $_[1] ? {@_} : $_[0];
-        $c->{form} =
-          Data::FormValidator->check( $c->request->parameters, $form );
-    }
-    return $c->{form};
-}
-
 =head1 SEE ALSO
 
 L<Catalyst>, L<Data::FormValidator>
@@ -91,6 +65,10 @@ L<Catalyst>, L<Data::FormValidator>
 =head1 AUTHOR
 
 Sebastian Riedel, C<sri@cpan.org>
+
+=head1 CONTRIBUTORS
+
+Devin Austin C<(dhoss@cpan.org)>
 
 =head1 COPYRIGHT
 

@@ -1,11 +1,12 @@
-use ExtUtils::MakeMaker;
+use inc::Module::Install;
 
-WriteMakefile(
-    NAME      => 'Catalyst::Plugin::FormValidator',
-    AUTHOR    => 'Sebastian Riedel (sri@oook.de)',
-    PREREQ_PM => {
-        Catalyst              => '2.99',
-        'Data::FormValidator' => 0
-    },
-    VERSION_FROM => 'FormValidator.pm'
-);
+name 'Catalyst-Plugin-FormValidator';
+author 'Sebastian Riedel (sri@oook.de)';
+all_from 'lib/Catalyst/Plugin/FormValidator.pm';
+requires 'Catalyst'            => '5.8';
+requires 'Data::FormValidator' => 0;
+requires 'Moose'               => '0.93';
+
+version '0.05';
+
+WriteAll;
