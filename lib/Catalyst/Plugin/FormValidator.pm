@@ -3,7 +3,7 @@ package Catalyst::Plugin::FormValidator;
 use strict;
 use Class::C3::Adopt::NEXT;
 use Data::FormValidator;
-our $VERSION = '0.07';
+our $VERSION = '0.09';
 $VERSION = eval $VERSION;
 
 sub prepare {
