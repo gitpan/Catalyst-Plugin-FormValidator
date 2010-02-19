@@ -1,21 +1,27 @@
 package Catalyst::Plugin::FormValidator;
 
-use Moose::Role;
+use strict;
+use Class::C3::Adopt::NEXT;
 use Data::FormValidator;
-our $VERSION = '0.05';
+our $VERSION = '0.07';
 $VERSION = eval $VERSION;
 
-sub form {
-    my ($c, @opts) = @_;
-    if ( @opts ) {
-	    my $form = Data::FormValidator->check( $c->request->parameters, {@opts});
-        return $form;
-    }
-    else {
-        return Data::FormValidator->check( $c->request->parameters, {} );
-    }
+sub prepare {
+    my $c = shift;
+    $c = $c->NEXT::prepare(@_);
+    $c->{form} = Data::FormValidator->check( $c->request->parameters, {} );
+    return $c;
 }
 
+sub form {
+    my $c = shift;
+    if ( $_[0] ) {
+        my $form = $_[1] ? {@_} : $_[0];
+        $c->{form} =
+          Data::FormValidator->check( $c->request->parameters, $form );
+    }
+    return $c->{form};
+}
 =head1 NAME
 
 Catalyst::Plugin::FormValidator - Data::FormValidator
