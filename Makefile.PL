@@ -7,6 +7,6 @@ requires 'Catalyst'            => '5.8';
 requires 'Data::FormValidator' => 0;
 requires 'Moose'               => '0.93';
 
-version '0.091';
+version '0.092';
 
 WriteAll;

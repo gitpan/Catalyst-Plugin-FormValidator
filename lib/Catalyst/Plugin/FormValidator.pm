@@ -3,12 +3,12 @@ package Catalyst::Plugin::FormValidator;
 use strict;
 use Class::C3::Adopt::NEXT;
 use Data::FormValidator;
-our $VERSION = '0.09';
+our $VERSION = '0.092';
 $VERSION = eval $VERSION;
 
 sub prepare {
     my $c = shift;
-    $c = $c->NEXT::prepare(@_);
+    $c = $c->maybe::next::method();
     $c->{form} = Data::FormValidator->check( $c->request->parameters, {} );
     return $c;
 }
