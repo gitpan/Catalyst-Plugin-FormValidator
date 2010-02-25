@@ -1,5 +1,10 @@
 Revision history for Perl extension Catalyst::Plugin::FormValidator.
 
+0.093_01  Tue Feb 23 15:04
+       - Class::C3::Adopt::NEXT is not used so is removed.
+       - MRO::Compat added for maybe::next::method per https://rt.cpan.org/Public/Bug/Display.html?id=54917
+       - Pod tests now author only and must pass.
+
 0.092  Sun Feb 21  16:04:00
        - added proper Class::C3::Adopt::NEXT method calls
        - added shipit stuff

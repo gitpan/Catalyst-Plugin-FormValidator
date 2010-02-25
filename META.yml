@@ -20,7 +20,8 @@ no_index:
 requires:
   Catalyst: 5.8
   Data::FormValidator: 0
+  MRO::Compat: 0
   Moose: 0.93
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.092
+version: 0.093_1

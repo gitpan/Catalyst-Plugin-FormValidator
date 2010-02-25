@@ -1,17 +1,31 @@
 package Catalyst::Plugin::FormValidator;
 
 use strict;
-use Class::C3::Adopt::NEXT;
+use MRO::Compat;
 use Data::FormValidator;
-our $VERSION = '0.092';
+
+our $VERSION = '0.093_1';
 $VERSION = eval $VERSION;
+
+=head2 prepare
+
+Override Catalyst's prepare
+
+=cut
 
 sub prepare {
     my $c = shift;
-    $c = $c->maybe::next::method();
+    $c = $c->maybe::next::method(@_);
     $c->{form} = Data::FormValidator->check( $c->request->parameters, {} );
     return $c;
 }
+
+
+=head2 form
+
+$c->form object
+
+=cut 
 
 sub form {
     my $c = shift;
