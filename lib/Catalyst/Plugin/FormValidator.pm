@@ -4,7 +4,7 @@ use strict;
 use MRO::Compat;
 use Data::FormValidator;
 
-our $VERSION = '0.093';
+our $VERSION = '0.094';
 $VERSION = eval $VERSION;
 
 =head2 prepare
